@@ -7,6 +7,7 @@ __all__ = ['app']
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return '<h2>Welcome to Cookie Pool System</h2>'

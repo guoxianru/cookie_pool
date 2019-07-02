@@ -20,7 +20,7 @@ class CookiesGenerator(object):
 
     def __del__(self):
         self.close()
-    
+
     def init_browser(self):
         """
         通过browser参数初始化全局浏览器供模拟登录使用
@@ -34,7 +34,7 @@ class CookiesGenerator(object):
             self.browser.set_window_size(1400, 500)
         elif BROWSER_TYPE == 'Chrome':
             self.browser = webdriver.Chrome()
-    
+
     def new_cookies(self, username, password):
         """
         新生成Cookies，子类需要重写
@@ -43,7 +43,7 @@ class CookiesGenerator(object):
         :return:
         """
         raise NotImplementedError
-    
+
     def process_cookies(self, cookies):
         """
         处理Cookies
@@ -54,7 +54,7 @@ class CookiesGenerator(object):
         for cookie in cookies:
             dict[cookie['name']] = cookie['value']
         return dict
-    
+
     def run(self):
         """
         运行, 得到所有账户, 然后顺次模拟登录
@@ -62,7 +62,7 @@ class CookiesGenerator(object):
         """
         accounts_usernames = self.accounts_db.usernames()
         cookies_usernames = self.cookies_db.usernames()
-        
+
         for username in accounts_usernames:
             if not username in cookies_usernames:
                 password = self.accounts_db.get(username)
@@ -83,7 +83,7 @@ class CookiesGenerator(object):
                     print(result.get('content'))
         else:
             print('所有账号都已经成功获取Cookies')
-    
+
     def close(self):
         """
         关闭
@@ -106,7 +106,7 @@ class WeiboCookiesGenerator(CookiesGenerator):
         """
         CookiesGenerator.__init__(self, website)
         self.website = website
-    
+
     def new_cookies(self, username, password):
         """
         生成Cookies
