@@ -24,7 +24,7 @@ api_list = {
     '/<website>/add/<username>/<password>': u'添加账号组',
     '/<website>/count': u'cookie数量',
     '/<website>/random': u'获取一个cookie',
-    '使用方法': 'host:port/关键词',
+    '使用方法': 'host:port/关键词'
 }
 
 

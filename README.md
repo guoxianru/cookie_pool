@@ -117,3 +117,35 @@ Cookies检测完成
 成功获取到Cookies {'SUHB': '08J77UIj4w5n_T', 'SCF': 'AimcUCUVvHjswSBmTswKh0g4kNj4K7_U9k57YzxbqFt4SFBhXq3Lx4YSNO9VuBV841BMHFIaH4ipnfqZnK7W6Qs.', 'SSOLoginState': '1501439488', '_T_WM': '99b7d656220aeb9207b5db97743adc02', 'M_WEIBOCN_PARAMS': 'uicode%3D20000174', 'SUB': '_2A250elZQDeRhGeBM6VAR8ifEzTuIHXVXhXoYrDV6PUJbkdBeLXTxkW17ZoYhhJ92N_RGCjmHpfv9TB8OJQ..'}
 成功保存Cookies
 ```
+
+### 五、Docker
+
+1.开发环境 Docker
+```shell
+# Workdir proxy_pool
+docker build -t proxy_pool .
+docker run -it --rm -v $(pwd):/usr/src/app -p 5010:5010 proxy_pool
+```
+
+2.生产环境 Docker/docker-compose
+```shell
+## Workdir proxy_pool
+# docker build -t proxy_pool .
+# pip install docker-compose
+docker-compose -f docker-compose.yml up -d --build
+```
+
+
+### 六、使用
+
+1.可以通过api访问 39.106.189.108:5020 查看
+```shell
+{
+'/<website>/add/<username>/<password>': u'添加账号组',
+'/<website>/count': u'cookie数量',
+'/<website>/random': u'获取一个cookie',
+'使用方法': 'host:port/关键词'
+}
+```
+2.爬虫使用
+* 如果要在爬虫代码中使用的话， 可以将此api封装成函数直接使用.
