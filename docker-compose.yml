@@ -1,14 +1,14 @@
 version: '2'
 services:
-  proxy_pool:
+  cookie_pool:
     build: .
     ports:
       - "5020:5020"
     links:
-      - proxy_redis
+      - cookie_redis
     environment:
       db_type: SSDB
-      ssdb_host: proxy_redis
+      ssdb_host: cookie_redis
       ssdb_port: 6379
-  proxy_redis:
+  cookie_redis:
     image: "redis"

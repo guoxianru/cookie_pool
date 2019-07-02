@@ -19,7 +19,7 @@ class WeiboCookies():
         self.wait = WebDriverWait(self.browser, 20)
         self.username = username
         self.password = password
-    
+
     def open(self):
         """
         打开网页输入用户名密码并点击
@@ -34,7 +34,7 @@ class WeiboCookies():
         password.send_keys(self.password)
         time.sleep(1)
         submit.click()
-    
+
     def password_error(self):
         """
         判断是否密码错误
@@ -45,7 +45,7 @@ class WeiboCookies():
                 EC.text_to_be_present_in_element((By.ID, 'errorMsg'), '用户名或密码错误'))
         except TimeoutException:
             return False
-    
+
     def login_successfully(self):
         """
         判断是否登录成功
@@ -53,10 +53,11 @@ class WeiboCookies():
         """
         try:
             return bool(
-                WebDriverWait(self.browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'lite-iconf-profile'))))
+                WebDriverWait(self.browser, 5).until(
+                    EC.presence_of_element_located((By.CLASS_NAME, 'lite-iconf-profile'))))
         except TimeoutException:
             return False
-    
+
     def get_position(self):
         """
         获取验证码位置
@@ -73,7 +74,7 @@ class WeiboCookies():
         top, bottom, left, right = location['y'], location['y'] + size['height'], location['x'], location['x'] + size[
             'width']
         return (top, bottom, left, right)
-    
+
     def get_screenshot(self):
         """
         获取网页截图
@@ -82,7 +83,7 @@ class WeiboCookies():
         screenshot = self.browser.get_screenshot_as_png()
         screenshot = Image.open(BytesIO(screenshot))
         return screenshot
-    
+
     def get_image(self, name='captcha.png'):
         """
         获取验证码图片
@@ -93,7 +94,7 @@ class WeiboCookies():
         screenshot = self.get_screenshot()
         captcha = screenshot.crop((left, top, right, bottom))
         return captcha
-    
+
     def is_pixel_equal(self, image1, image2, x, y):
         """
         判断两个像素是否相同
@@ -112,7 +113,7 @@ class WeiboCookies():
             return True
         else:
             return False
-    
+
     def same_image(self, image, template):
         """
         识别相似验证码
@@ -133,7 +134,7 @@ class WeiboCookies():
             print('成功匹配')
             return True
         return False
-    
+
     def detect_image(self, image):
         """
         匹配图片
@@ -148,7 +149,7 @@ class WeiboCookies():
                 numbers = [int(number) for number in list(template_name.split('.')[0])]
                 print('拖动顺序', numbers)
                 return numbers
-    
+
     def move(self, numbers):
         """
         根据顺序拖动
@@ -184,14 +185,14 @@ class WeiboCookies():
                     dy = circles[numbers[index + 1] - 1].location['y'] - circle.location['y']
         except:
             return False
-    
+
     def get_cookies(self):
         """
         获取Cookies
         :return:
         """
         return self.browser.get_cookies()
-    
+
     def main(self):
         """
         破解入口

@@ -1,6 +1,7 @@
 import json
+from werkzeug.wrappers import Response
+from flask import jsonify
 from flask import Flask, g
-from cookiespool.config import *
 from cookiespool.db import *
 
 __all__ = ['app']
@@ -8,9 +9,28 @@ __all__ = ['app']
 app = Flask(__name__)
 
 
+class JsonResponse(Response):
+    @classmethod
+    def force_type(cls, response, environ=None):
+        if isinstance(response, (dict, list)):
+            response = jsonify(response)
+
+        return super(JsonResponse, cls).force_type(response, environ)
+
+
+app.response_class = JsonResponse
+
+api_list = {
+    '/<website>/add/<username>/<password>': u'添加账号组',
+    '/<website>/count': u'cookie数量',
+    '/<website>/random': u'获取一个cookie',
+    '使用方法': 'host:port/关键词',
+}
+
+
 @app.route('/')
 def index():
-    return '<h2>Welcome to Cookie Pool System</h2>'
+    return api_list
 
 
 def get_conn():
