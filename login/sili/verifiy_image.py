@@ -5,10 +5,31 @@ import json
 import requests
 import tesserocr
 from PIL import Image
+from aip import AipOcr
+
+
+def verifiy_baiduapi():
+    """图像验证码百度API识别"""
+    APP_ID = '17160738'
+    API_KEY = '3euGr1IQDSlNq3volV9dhqBZ'
+    SECRET_KEY = '2p2BvdZkzYBne2OoAbwBVi4YfeULVGiZ'
+    client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
+
+    def get_file_content(filePath):
+        with open(filePath, 'rb') as fp:
+            return fp.read()
+
+    image = get_file_content('yzm.png')
+    try:
+        verifiy_code = client.basicAccurate(image).get('words_result', '')[0].get('words', '')
+    except Exception as e:
+        print('失败原因：%s' % e)
+        verifiy_code = ''
+    return verifiy_code
 
 
 def verifiy_tesserocr():
-    """图像验证码识别"""
+    """图像验证码OCR识别"""
 
     def binarizing(img, threshold):
         """传入image对象进行灰度、二值处理"""
@@ -76,6 +97,7 @@ def verifiy_tesserocr():
 
 
 def verifiy_liangzhong():
+    """图像验证码联众识别"""
     api_username = 'gxr940301',
     api_password = 'gbt73016.'
     file_name = 'yzm.png'

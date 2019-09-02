@@ -51,11 +51,15 @@ class SiliCookies():
 
         # 识别验证码
 
-        # OCR识别
-        from .verifiy_image import verifiy_tesserocr
-        verifiy_code = verifiy_tesserocr()
+        # 百度API识别
+        from .verifiy_image import verifiy_baiduapi
+        verifiy_code = verifiy_baiduapi()
 
-        # # 打码平台(联众)
+        # # OCR识别
+        # from .verifiy_image import verifiy_tesserocr
+        # verifiy_code = verifiy_tesserocr()
+
+        # # 联众识别
         # from login.sili.verifiy_image import verifiy_liangzhong
         # verifiy_code = verifiy_liangzhong()
 

@@ -4,3 +4,4 @@ redis
 Flask
 pillow
 tesserocr
+baidu-aip
