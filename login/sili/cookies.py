@@ -124,5 +124,5 @@ class SiliCookies():
 
 
 if __name__ == '__main__':
-    result = SiliCookies('wangyang@cissdata.com', 'Ciss888*').main()
+    result = SiliCookies('username', 'password').main()
     print(result)
