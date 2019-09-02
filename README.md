@@ -2,7 +2,7 @@
 
 
 * 借鉴于：https://github.com/Python3WebSpider/CookiesPool
-* 2019.07.02 改进部分代码
+* 2019.09.02 改进部分代码
 
 
 ### 一、下载安装
@@ -21,13 +21,11 @@ pip install -r requirements.txt
 ## 基础配置
 ```python
 # Redis数据库地址，生产环境请配置为公网IP
-REDIS_HOST = '39.106.189.108'
+REDIS_HOST = 'host'
 # Redis端口
-REDIS_PORT = 6379
+REDIS_PORT = 'port'
 # Redis密码，如无填None
 REDIS_PASSWORD = ''
-# 产生器使用的浏览器
-BROWSER_TYPE = 'Chrome'
 # 产生器类，如扩展其他站点，请在此配置
 GENERATOR_MAP = {
     'weibo': 'WeiboCookiesGenerator'
@@ -68,17 +66,8 @@ python importer.py
 
 ```shell
 请输入账号密码组(格式：账号-密码，输入exit退出读入)：
-18459748505-astvar3647
-14760253606-gmidy8470
-14760253607-uoyuic8427
-18459749258-rktfye8937
-账号 18459748505 密码 astvar3647
-录入成功
-账号 14760253606 密码 gmidy8470
-录入成功
-账号 14760253607 密码 uoyuic8427
-录入成功
-账号 18459749258 密码 rktfye8937
+username-password
+账号 username 密码 password
 录入成功
 exit
 ```
@@ -100,38 +89,17 @@ API接口开始运行
 Cookies生成进程开始运行
 Cookies检测进程开始运行
 正在生成Cookies 账号 14747223314 密码 asdf1129
-正在测试Cookies 用户名 14747219309
-Cookies有效 14747219309
-正在测试Cookies 用户名 14740626332
-Cookies有效 14740626332
-正在测试Cookies 用户名 14740691419
-Cookies有效 14740691419
-正在测试Cookies 用户名 14740618009
-Cookies有效 14740618009
-正在测试Cookies 用户名 14747222472
-Cookies有效 14747222472
-Cookies检测完成
-验证码位置 420 580 384 544
-成功匹配
-拖动顺序 [1, 4, 2, 3]
 成功获取到Cookies {'SUHB': '08J77UIj4w5n_T', 'SCF': 'AimcUCUVvHjswSBmTswKh0g4kNj4K7_U9k57YzxbqFt4SFBhXq3Lx4YSNO9VuBV841BMHFIaH4ipnfqZnK7W6Qs.', 'SSOLoginState': '1501439488', '_T_WM': '99b7d656220aeb9207b5db97743adc02', 'M_WEIBOCN_PARAMS': 'uicode%3D20000174', 'SUB': '_2A250elZQDeRhGeBM6VAR8ifEzTuIHXVXhXoYrDV6PUJbkdBeLXTxkW17ZoYhhJ92N_RGCjmHpfv9TB8OJQ..'}
 成功保存Cookies
+正在测试Cookies 用户名 14747219309
+Cookies有效 14747219309
+Cookies检测完成
 ```
 
 ### 五、Docker
 
-1.开发环境 Docker
+生产环境 Docker/docker-compose
 ```shell
-# Workdir proxy_pool
-docker build -t proxy_pool .
-docker run -it --rm -v $(pwd):/usr/src/app -p 5010:5010 proxy_pool
-```
-
-2.生产环境 Docker/docker-compose
-```shell
-## Workdir proxy_pool
-# docker build -t proxy_pool .
-# pip install docker-compose
 docker-compose -f docker-compose.yml up -d --build
 ```
 

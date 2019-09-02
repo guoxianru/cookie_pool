@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
+
 # Redis数据库地址
 REDIS_HOST = '39.106.189.108'
 
@@ -7,21 +10,18 @@ REDIS_PORT = 6379
 # Redis密码，如无填None
 REDIS_PASSWORD = '1111'
 
-# 产生器使用的浏览器
-BROWSER_TYPE = 'Chrome'
-
 # 产生器类，如扩展其他站点，请在此配置
 GENERATOR_MAP = {
-    'weibo': 'WeiboCookiesGenerator'
+    'sili': 'SiliCookiesGenerator'
 }
 
 # 测试类，如扩展其他站点，请在此配置
 TESTER_MAP = {
-    'weibo': 'WeiboValidTester'
+    'sili': 'SiliValidTester'
 }
 
 TEST_URL_MAP = {
-    'weibo': 'https://m.weibo.cn/'
+    'sili': 'https://www.siliconexpert.cn/productcategories'
 }
 
 # 产生器和验证器循环周期

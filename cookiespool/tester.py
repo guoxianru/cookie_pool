@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
+
 import json
 import requests
 from requests.exceptions import ConnectionError
@@ -19,9 +22,12 @@ class ValidTester(object):
             self.test(username, cookies)
 
 
-class WeiboValidTester(ValidTester):
+class SiliValidTester(ValidTester):
     def __init__(self, website='weibo'):
         ValidTester.__init__(self, website)
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+        }
 
     def test(self, username, cookies):
         print('正在测试Cookies', '用户名', username)
@@ -34,9 +40,12 @@ class WeiboValidTester(ValidTester):
             return
         try:
             test_url = TEST_URL_MAP[self.website]
-            response = requests.get(test_url, cookies=cookies, timeout=5, allow_redirects=False)
-            if response.status_code == 200:
-                print('Cookies有效', username)
+            response = requests.get(test_url, headers=self.headers, cookies=cookies)
+
+            if '<h4 class="loginTit">' not in response.text:
+                print('Cookies未失效', username)
+            elif 'statusCode: 406' not in response.text:
+                print('Cookies未异常', username)
             else:
                 print(response.status_code, response.headers)
                 print('Cookies失效', username)
@@ -47,4 +56,4 @@ class WeiboValidTester(ValidTester):
 
 
 if __name__ == '__main__':
-    WeiboValidTester().run()
+    SiliValidTester().run()

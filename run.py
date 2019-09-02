@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
+
 from cookiespool.scheduler import Scheduler
 
 

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
+
 import json
 from werkzeug.wrappers import Response
 from flask import jsonify

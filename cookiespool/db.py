@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
+
 import random
 import redis
 from cookiespool.config import *
@@ -77,6 +80,6 @@ class RedisClient(object):
 
 
 if __name__ == '__main__':
-    conn = RedisClient('accounts', 'weibo')
-    result = conn.set('hell2o', 'sss3s')
+    conn = RedisClient('accounts', 'website')
+    result = conn.set('username', 'password')
     print(result)

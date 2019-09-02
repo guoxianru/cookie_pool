@@ -1,14 +1,18 @@
-version: '2'
+version: '3'
+
 services:
+  #  cookie池容器
   cookie_pool:
+    container_name: cookie_pool
     build: .
+    restart: always
     ports:
       - "5020:5020"
-    links:
-      - cookie_redis
-    environment:
-      db_type: SSDB
-      ssdb_host: cookie_redis
-      ssdb_port: 6379
-  cookie_redis:
-    image: "redis"
+    depends_on:
+      - selenium
+  #  selenium+Chrome容器
+  selenium:
+    container_name: selenium
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"

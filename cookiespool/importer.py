@@ -1,8 +1,9 @@
-import requests
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
 
 from cookiespool.db import RedisClient
 
-conn = RedisClient('accounts', 'weibo')
+conn = RedisClient('accounts', 'sili')
 
 
 def set(account, sep='-'):

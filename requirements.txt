@@ -2,3 +2,5 @@ requests
 selenium
 redis
 Flask
+pillow
+tesserocr

@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# -*- author: GXR -*-
+
 import time
 from multiprocessing import Process
 
@@ -31,7 +34,6 @@ class Scheduler(object):
                     generator = eval(cls + '(website="' + website + '")')
                     generator.run()
                     print('Cookies生成完成')
-                    generator.close()
                     time.sleep(cycle)
             except Exception as e:
                 print(e.args)
