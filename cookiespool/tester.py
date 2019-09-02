@@ -42,15 +42,18 @@ class SiliValidTester(ValidTester):
             test_url = TEST_URL_MAP[self.website]
             response = requests.get(test_url, headers=self.headers, cookies=cookies)
 
-            if '<h4 class="loginTit">' not in response.text:
-                print('Cookies未失效', username)
-            elif 'statusCode: 406' not in response.text:
-                print('Cookies未异常', username)
-            else:
-                print(response.status_code, response.headers)
+            if '<h4 class="loginTit">' in response.text:
                 print('Cookies失效', username)
                 self.cookies_db.delete(username)
                 print('删除Cookies', username)
+
+            elif 'statusCode: 406' in response.text:
+                print('Cookies异常', username)
+                self.cookies_db.delete(username)
+                print('删除Cookies', username)
+
+            else:
+                print('Cookies有效', username)
         except ConnectionError as e:
             print('发生异常', e.args)
 
