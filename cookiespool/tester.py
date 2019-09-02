@@ -41,17 +41,14 @@ class SiliValidTester(ValidTester):
         try:
             test_url = TEST_URL_MAP[self.website]
             response = requests.get(test_url, headers=self.headers, cookies=cookies)
-
             if '<h4 class="loginTit">' in response.text:
                 print('Cookies失效', username)
                 self.cookies_db.delete(username)
                 print('删除Cookies', username)
-
-            elif 'statusCode: 406' in response.text:
+            elif 'Not Authorized Token' in response.text:
                 print('Cookies异常', username)
                 self.cookies_db.delete(username)
                 print('删除Cookies', username)
-
             else:
                 print('Cookies有效', username)
         except ConnectionError as e:

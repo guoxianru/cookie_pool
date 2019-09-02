@@ -16,7 +16,7 @@ class SiliCookies():
         from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
         time.sleep(5)
         self.browser = webdriver.Remote(
-            command_executor="http://selenium:4444/wd/hub",
+            command_executor="http://selenium_cookie:4444/wd/hub",
             desired_capabilities=DesiredCapabilities.CHROME)
 
         # # 开发环境:Chrome无界面
