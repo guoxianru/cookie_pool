@@ -19,7 +19,7 @@ pip install -r requirements.txt
 * config.py 为项目配置文件
 
 ## 基础配置
-```python
+```shell
 # Redis数据库地址，生产环境请配置为公网IP
 REDIS_HOST = 'host'
 # Redis端口

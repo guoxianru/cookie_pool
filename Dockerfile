@@ -13,8 +13,8 @@ RUN mv /bin/bash /bin/sh
 RUN export LC_ALL=C
 RUN source ~/.bashrc
 
-RUN mkdir ~/.pip
-COPY ./sources.list ~/.pip/pip.conf
+RUN mkdir /root/.pip
+COPY ./pip.conf /root/.pip/pip.conf
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
