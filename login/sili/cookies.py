@@ -25,6 +25,9 @@ class SiliCookies():
         # opt.add_argument('--headless')
         # self.browser = webdriver.Chrome(chrome_options=opt)
 
+        # # 开发环境:Chrome可视化
+        # self.browser = webdriver.Chrome()
+
         self.browser.delete_all_cookies()
 
     def login(self):
@@ -78,7 +81,7 @@ class SiliCookies():
             login_button.click()
             time.sleep(3)
         except Exception as e:
-            print('Error：%s' % e)
+            print('登录按钮异常：%s' % e)
 
         # 点击继续按钮
         try:
@@ -86,7 +89,18 @@ class SiliCookies():
             continue_button.click()
             time.sleep(3)
         except Exception as e:
-            print('Error：%s' % e)
+            print('继续按钮未出现：%s' % e)
+
+        # 检测账号是否被封
+        try:
+            ban_button = self.browser.find_element_by_id('Login_errow')
+            ban_class = ban_button.get_attribute('class')
+            if 'hide' not in ban_class:
+                print('账号被封，等待一周！')
+                time.sleep(604800)
+                print('等待结束，继续模拟登陆！')
+        except Exception as e:
+            print('封号提示未出现：%s' % e)
 
     def cookie(self):
         """验证登陆是否成功,更新cookie"""
@@ -110,10 +124,7 @@ class SiliCookies():
         self.browser.close()
 
     def main(self):
-        """
-        破解入口
-        :return:
-        """
+        """入口"""
         while 1:
             self.login()
             cookie = self.cookie()
